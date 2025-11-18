@@ -3,10 +3,8 @@ let myFont;
 function preload() {
   myFont = loadFont('Inter-Medium.ttf'); // root folder
 }
-
-
 function setup() {
-  createCanvas(1200, 600, WEBGL);
+  createCanvas(1200, 475, WEBGL);
   textFont(myFont);        // Use the loaded Inter font
   textAlign(CENTER, CENTER);
   textSize(8);
@@ -18,10 +16,10 @@ function draw() {
   let rectWidth = 100;
   let rectHeight = 200;
   let rectDepth = 0.05;   // very thin
-  let depthSpacing = 5;  
-  let numRects = 90;
+  let depthSpacing = 10;  
+  let numRects = 45;
 
-  rotateY(frameCount * 0.005);
+  rotateY(frameCount * 0.008);
 
   stroke(255);
   strokeWeight(0.5); // thin edge lines
