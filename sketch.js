@@ -1,9 +1,8 @@
 let myFont;
-
 function preload() {
-  // Load the uploaded font from the Assets tab
-  myFont = loadFont('Inter-Medium.ttf');
+  myFont = loadFont('assets/Inter-Medium.ttf');
 }
+
 
 function setup() {
   createCanvas(1200, 600, WEBGL);
