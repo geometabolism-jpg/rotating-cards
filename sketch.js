@@ -5,7 +5,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1200, 500, WEBGL);
+  createCanvas(1200, 600, WEBGL);
   textFont(myFont);        // Use the loaded Inter font
   textAlign(CENTER, CENTER);
   textSize(8);
