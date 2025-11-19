@@ -2,16 +2,13 @@ let myFont;
 let canvas;
 
 function preload() {
-  // Load the font from your assets folder
-  myFont = loadFont('Inter-Medium.ttf');
+  myFont = loadFont('Inter-Medium.ttf'); // load font from assets
 }
 
 function setup() {
-  // Create a responsive canvas based on window width
-  const canvasWidth = windowWidth * 0.95; // 95% of viewport width
-  const canvasHeight = (canvasWidth / 1200) * 600; // maintain 1200x600 ratio
-  canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
-  canvas.parent(document.body); // attach canvas to body
+  // Make canvas responsive to both width and height
+  resizeResponsiveCanvas();
+  canvas.parent(document.body);
   textFont(myFont);
   textAlign(CENTER, CENTER);
   textSize(8);
@@ -61,9 +58,28 @@ function draw() {
   }
 }
 
-// Automatically resize canvas on window resize
+// Function to make canvas responsive to viewport
+function resizeResponsiveCanvas() {
+  const maxWidth = windowWidth * 0.95;
+  const maxHeight = windowHeight * 0.8; // leave 20% for browser UI
+  const ratio = 1200 / 600; // original aspect ratio
+
+  let canvasWidth = maxWidth;
+  let canvasHeight = canvasWidth / ratio;
+
+  if (canvasHeight > maxHeight) {
+    canvasHeight = maxHeight;
+    canvasWidth = canvasHeight * ratio;
+  }
+
+  if (!canvas) {
+    canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
+  } else {
+    resizeCanvas(canvasWidth, canvasHeight);
+  }
+}
+
+// Update canvas on window resize
 function windowResized() {
-  const canvasWidth = windowWidth * 0.95;
-  const canvasHeight = (canvasWidth / 1200) * 600;
-  resizeCanvas(canvasWidth, canvasHeight);
+  resizeResponsiveCanvas();
 }
