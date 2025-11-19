@@ -2,14 +2,16 @@ let myFont;
 let canvas;
 
 function preload() {
-  myFont = loadFont('Inter-Medium.ttf'); // root folder
+  // Load the font from your assets folder
+  myFont = loadFont('Inter-Medium.ttf');
 }
 
 function setup() {
-  // Make canvas responsive to window width
+  // Responsive canvas based on window width
   const canvasWidth = windowWidth * 0.95; // 95% of viewport width
   const canvasHeight = (canvasWidth / 1200) * 500; // maintain 1200x500 ratio
   canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
+  canvas.parent(document.body); // ensure canvas attaches to body
   textFont(myFont);
   textAlign(CENTER, CENTER);
   textSize(8);
@@ -59,9 +61,10 @@ function draw() {
   }
 }
 
-// Update canvas on window resize
+// Resize canvas automatically on window resize
 function windowResized() {
   const canvasWidth = windowWidth * 0.95;
   const canvasHeight = (canvasWidth / 1200) * 500;
   resizeCanvas(canvasWidth, canvasHeight);
 }
+
