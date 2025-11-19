@@ -11,14 +11,13 @@ function setup() {
   textFont(myFont);
   textAlign(CENTER, CENTER);
   textSize(8);
+  ortho(-width/2, width/2, -height/2, height/2, 0, 1000); // switch to orthographic
 }
 
 function draw() {
   background(0);
 
-  // Scaling factor based on canvas width
-  let scaleFactor = width / 1200;
-
+  let scaleFactor = width / 1200; // scale based on width
   let rectWidth = 100 * scaleFactor;
   let rectHeight = 200 * scaleFactor;
   let rectDepth = 0.05 * scaleFactor;
@@ -76,6 +75,8 @@ function resizeResponsiveCanvas() {
   } else {
     resizeCanvas(canvasWidth, canvasHeight);
   }
+
+  ortho(-canvasWidth/2, canvasWidth/2, -canvasHeight/2, canvasHeight/2, 0, 1000);
 }
 
 function windowResized() {
