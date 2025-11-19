@@ -1,14 +1,12 @@
 let myFont;
-let canvas;
 
 function preload() {
   myFont = loadFont('Inter-Medium.ttf'); // root folder
 }
 
 function setup() {
-  createResponsiveCanvas();
-  canvas.parent(document.body); // attach canvas
-  textFont(myFont);
+  createCanvas(1200, 500, WEBGL);
+  textFont(myFont);        // Use the loaded Inter font
   textAlign(CENTER, CENTER);
   textSize(8);
 }
@@ -16,17 +14,16 @@ function setup() {
 function draw() {
   background(0);
 
-  let scaleFactor = width / 1200; // scale everything based on canvas width
-  let rectWidth = 100 * scaleFactor;
-  let rectHeight = 200 * scaleFactor;
-  let rectDepth = 0.05 * scaleFactor;
-  let depthSpacing = 10 * scaleFactor;
+  let rectWidth = 100;
+  let rectHeight = 200;
+  let rectDepth = 0.05;   // very thin
+  let depthSpacing = 10;
   let numRects = 45;
 
   rotateY(frameCount * 0.008);
 
   stroke(255);
-  strokeWeight(0.5 * scaleFactor);
+  strokeWeight(0.5); // thin edge lines
   fill(0);
 
   for (let i = 0; i < numRects; i++) {
@@ -37,47 +34,23 @@ function draw() {
     fill(255);
     noStroke();
 
+    // Front of the first card
     if (i === 0) {
       push();
-      translate(0, 0, rectDepth / 2 + 0.01 * scaleFactor);
+      translate(0, 0, rectDepth / 2 + 0.01);
       text("ACTOR", 0, 0);
       pop();
     }
 
+    // Back of the last card
     if (i === numRects - 1) {
       push();
-      rotateY(PI);
-      translate(0, 0, rectDepth / 2 + 0.01 * scaleFactor);
+      rotateY(PI); // rotate 180° to face the camera
+      translate(0, 0, rectDepth / 2 + 0.01);
       text("ACTOR", 0, 0);
       pop();
     }
 
     pop();
   }
-}
-
-// Create a canvas that scales to viewport
-function createResponsiveCanvas() {
-  const maxWidth = windowWidth * 0.95;       // 95% of viewport width
-  const maxHeight = windowHeight * 0.8;      // max height on mobile
-  const ratio = 1200 / 600;                  // original aspect ratio
-
-  let canvasWidth = maxWidth;
-  let canvasHeight = canvasWidth / ratio;
-
-  if (canvasHeight > maxHeight) {
-    canvasHeight = maxHeight;
-    canvasWidth = canvasHeight * ratio;
-  }
-
-  if (!canvas) {
-    canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
-  } else {
-    resizeCanvas(canvasWidth, canvasHeight);
-  }
-}
-
-// Update canvas on window resize
-function windowResized() {
-  createResponsiveCanvas();
 }
