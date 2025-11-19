@@ -82,3 +82,4 @@ function resizeResponsiveCanvas() {
 function windowResized() {
   resizeResponsiveCanvas();
 }
+
