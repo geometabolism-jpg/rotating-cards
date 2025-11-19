@@ -7,11 +7,11 @@ function preload() {
 }
 
 function setup() {
-  // Responsive canvas based on window width
+  // Create a responsive canvas based on window width
   const canvasWidth = windowWidth * 0.95; // 95% of viewport width
-  const canvasHeight = (canvasWidth / 1200) * 500; // maintain 1200x500 ratio
+  const canvasHeight = (canvasWidth / 1200) * 600; // maintain 1200x600 ratio
   canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
-  canvas.parent(document.body); // ensure canvas attaches to body
+  canvas.parent(document.body); // attach canvas to body
   textFont(myFont);
   textAlign(CENTER, CENTER);
   textSize(8);
@@ -22,8 +22,8 @@ function draw() {
 
   let rectWidth = 100;
   let rectHeight = 200;
-  let rectDepth = 0.05;   // very thin
-  let depthSpacing = 10;  
+  let rectDepth = 0.05; // very thin
+  let depthSpacing = 10;
   let numRects = 45;
 
   rotateY(frameCount * 0.008);
@@ -61,10 +61,9 @@ function draw() {
   }
 }
 
-// Resize canvas automatically on window resize
+// Automatically resize canvas on window resize
 function windowResized() {
   const canvasWidth = windowWidth * 0.95;
-  const canvasHeight = (canvasWidth / 1200) * 500;
+  const canvasHeight = (canvasWidth / 1200) * 600;
   resizeCanvas(canvasWidth, canvasHeight);
 }
-
