@@ -20,7 +20,7 @@ function draw() {
   let depthSpacing = 10;
   let numRects = 45;
 
-  rotateY(frameCount * 0.008);
+  rotateY(frameCount * 0.004);
 
   stroke(255);
   strokeWeight(0.5); // thin edge lines
