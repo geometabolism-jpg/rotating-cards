@@ -1,11 +1,16 @@
 let myFont;
+let canvas;
 
 function preload() {
   myFont = loadFont('Inter-Medium.ttf'); // root folder
 }
+
 function setup() {
-  createCanvas(1200, 500, WEBGL);
-  textFont(myFont);        // Use the loaded Inter font
+  // Make canvas responsive to window width
+  const canvasWidth = windowWidth * 0.95; // 95% of viewport width
+  const canvasHeight = (canvasWidth / 1200) * 500; // maintain 1200x500 ratio
+  canvas = createCanvas(canvasWidth, canvasHeight, WEBGL);
+  textFont(myFont);
   textAlign(CENTER, CENTER);
   textSize(8);
 }
@@ -22,7 +27,7 @@ function draw() {
   rotateY(frameCount * 0.008);
 
   stroke(255);
-  strokeWeight(0.5); // thin edge lines
+  strokeWeight(0.5);
   fill(0);
 
   for (let i = 0; i < numRects; i++) {
@@ -44,7 +49,7 @@ function draw() {
     // Back of the last card
     if (i === numRects - 1) {
       push();
-      rotateY(PI); // rotate 180° to face the camera
+      rotateY(PI);
       translate(0, 0, rectDepth / 2 + 0.01);
       text("ACTOR", 0, 0);
       pop();
@@ -52,4 +57,11 @@ function draw() {
 
     pop();
   }
+}
+
+// Update canvas on window resize
+function windowResized() {
+  const canvasWidth = windowWidth * 0.95;
+  const canvasHeight = (canvasWidth / 1200) * 500;
+  resizeCanvas(canvasWidth, canvasHeight);
 }
