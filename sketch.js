@@ -2,11 +2,10 @@ let myFont;
 let canvas;
 
 function preload() {
-  myFont = loadFont('Inter-Medium.ttf'); // load font from assets
+  myFont = loadFont('Inter-Medium.ttf');
 }
 
 function setup() {
-  // Make canvas responsive to both width and height
   resizeResponsiveCanvas();
   canvas.parent(document.body);
   textFont(myFont);
@@ -17,16 +16,19 @@ function setup() {
 function draw() {
   background(0);
 
-  let rectWidth = 100;
-  let rectHeight = 200;
-  let rectDepth = 0.05; // very thin
-  let depthSpacing = 10;
+  // Scaling factor based on canvas width
+  let scaleFactor = width / 1200;
+
+  let rectWidth = 100 * scaleFactor;
+  let rectHeight = 200 * scaleFactor;
+  let rectDepth = 0.05 * scaleFactor;
+  let depthSpacing = 10 * scaleFactor;
   let numRects = 45;
 
   rotateY(frameCount * 0.008);
 
   stroke(255);
-  strokeWeight(0.5);
+  strokeWeight(0.5 * scaleFactor);
   fill(0);
 
   for (let i = 0; i < numRects; i++) {
@@ -37,19 +39,17 @@ function draw() {
     fill(255);
     noStroke();
 
-    // Front of the first card
     if (i === 0) {
       push();
-      translate(0, 0, rectDepth / 2 + 0.01);
+      translate(0, 0, rectDepth / 2 + 0.01 * scaleFactor);
       text("ACTOR", 0, 0);
       pop();
     }
 
-    // Back of the last card
     if (i === numRects - 1) {
       push();
       rotateY(PI);
-      translate(0, 0, rectDepth / 2 + 0.01);
+      translate(0, 0, rectDepth / 2 + 0.01 * scaleFactor);
       text("ACTOR", 0, 0);
       pop();
     }
@@ -58,11 +58,10 @@ function draw() {
   }
 }
 
-// Function to make canvas responsive to viewport
 function resizeResponsiveCanvas() {
   const maxWidth = windowWidth * 0.95;
-  const maxHeight = windowHeight * 0.8; // leave 20% for browser UI
-  const ratio = 1200 / 600; // original aspect ratio
+  const maxHeight = windowHeight * 0.8;
+  const ratio = 1200 / 600;
 
   let canvasWidth = maxWidth;
   let canvasHeight = canvasWidth / ratio;
@@ -79,7 +78,6 @@ function resizeResponsiveCanvas() {
   }
 }
 
-// Update canvas on window resize
 function windowResized() {
   resizeResponsiveCanvas();
 }
